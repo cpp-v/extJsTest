@@ -41,7 +41,7 @@ var combo = new Ext.form.ComboBox({
     };
     
    var custRenderers={
-     testBool:function (v) {   console.log('custRenderers testBool');
+     testBool:function (v) {
      	 if (v==true) return 'Да';
      	 else return 'Нет';
                            }
