@@ -56,7 +56,7 @@ var combo = new Ext.form.ComboBox({
             scrollOffset: 2 // the grid will never have scrollbars
         };     
 
-   var propsGrid = new Ext.grid.PropertyGrid({
+propsGrid = new Ext.grid.PropertyGrid({
         renderTo: 'prop-grid',
         width: 300,
         autoHeight: true,
