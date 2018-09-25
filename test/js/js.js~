@@ -2,7 +2,7 @@
 Ext.onReady(function(){
 
    var source= {
-            '(name)': 'Properties Grid',
+            _(name): 'Properties Grid',
             grouping: false,
             autoFitColumns: true,
             productionQuality: false,
@@ -57,15 +57,21 @@ var combo = new Ext.form.ComboBox({
         };     
 
 propsGrid = new Ext.grid.PropertyGrid({
-        renderTo: 'prop-grid',
+        //renderTo: 'prop-grid',
         width: 300,
         autoHeight: true,
         propertyNames:prNames,
         source: source,
         customEditors:custEditors,
         customRenderers:custRenderers,
-        viewConfig :viewConf 
+        viewConfig :viewConf,
+        nameText:'Наименование'
+         
 		});
+
+var cm=propsGrid.getColumnModel();
+
+propsGrid.render('prop-grid');
 
 
         
