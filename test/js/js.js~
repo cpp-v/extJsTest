@@ -1,8 +1,10 @@
 //alert("1");
+
+CfgAs={};
 Ext.onReady(function(){
 
-   var source= {
-            _(name): 'Properties Grid',
+   CfgAs.source= {
+            '_(name)': 'Properties Grid',
             grouping: false,
             autoFitColumns: true,
             productionQuality: false,
@@ -15,7 +17,7 @@ Ext.onReady(function(){
             testBool:true
    };
 
-var combo = new Ext.form.ComboBox({
+CfgAs.combo = new Ext.form.ComboBox({
     typeAhead: true,
     triggerAction: 'all',
     lazyRender:true,
@@ -33,43 +35,43 @@ var combo = new Ext.form.ComboBox({
 });
 
 
-   var custEditors={
+   CfgAs.custEditors={
         'startTime': new Ext.grid.GridEditor(new Ext.form.TimeField({selectOnFocus:true})),
-        'cb': new Ext.grid.GridEditor(combo),
+        'cb': new Ext.grid.GridEditor(CfgAs.combo),
         'testBool': new Ext.grid.GridEditor(new Ext.form.Checkbox({}))
         
     };
     
-   var custRenderers={
+   CfgAs.custRenderers={
      testBool:function (v) {   console.log('custRenderers testBool');
      	 if (v==true) return 'Да';
      	 else return 'Нет';
                            }
                        };       
     
-   var prNames= {
+   CfgAs.prNames= {
             tested: 'QA',
             borderWidth: 'Border Width'
         };    
-   var viewConf={
+   CfgAs.viewConf={
             forceFit: true,
             scrollOffset: 2 // the grid will never have scrollbars
         };     
 
-propsGrid = new Ext.grid.PropertyGrid({
+CfgAs.propsGrid = new Ext.grid.PropertyGrid({
         //renderTo: 'prop-grid',
         width: 300,
         autoHeight: true,
-        propertyNames:prNames,
-        source: source,
-        customEditors:custEditors,
-        customRenderers:custRenderers,
-        viewConfig :viewConf,
+        propertyNames:CfgAs.prNames,
+        source: CfgAs.source,
+        customEditors:CfgAs.custEditors,
+        customRenderers:CfgAs.custRenderers,
+        viewConfig :CfgAs.viewConf,
         nameText:'Наименование'
          
 		});
 
-var cm=propsGrid.getColumnModel();
+CfgAs.cm=CfgAs.propsGrid.getColumnModel();
 
 propsGrid.render('prop-grid');
 

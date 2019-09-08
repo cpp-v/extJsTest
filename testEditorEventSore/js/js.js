@@ -1,0 +1,149 @@
+//alert("1");
+
+/*
+Типы:
+Число - 1
+Цвет - 2
+Строка - 3
+Логика - 4
+*/
+
+Ext.onReady(function(){
+CPPV_GFG={};	
+CPPV_GFG.writer = new Ext.data.JsonWriter({
+    //encode: true,
+    //writeAllFields: true // write all fields, not just those that changed
+});	
+Ext.QuickTips.init();
+CPPV_GFG.store = new Ext.data.JsonStore({
+	autoSave:true,
+ //writer:CPPV_GFG.writer	 
+    data:[	
+{name:'ame1',price:80,isReady:true},
+{name:'name2',price:70,isReady:true},
+{name:'name3',price:60,isReady:true},
+{name:'name4',price:20,isReady:true}
+],
+    fields: ['name','price','isReady']
+   // ,listeners: {'beforesave':{fn:onbssave_tv,scope:this}},
+     ,listeners: {'update':{fn:onStoreUpdate,scope:this}}
+    
+
+});  console.log('CPPV_GFG.store');console.log(CPPV_GFG.store)
+
+ var cm = new Ext.grid.ColumnModel({
+        // specify any defaults for each column
+        defaults: {
+            sortable: true // columns are not sortable by default           
+        },
+        columns:[{
+                id       :'company',
+                header   : 'Наименование', 
+                width    : 160, 
+                sortable : true, 
+                dataIndex: 'name'
+,editor: { xtype: 'textfield'}                        
+            },
+            {
+                header   : 'Цена', 
+                width    : 75, 
+                sortable : true, 
+                renderer : 'usMoney', 
+                dataIndex: 'price'
+                ,editor: { xtype: 'numberfield'}        
+            },
+            {   xtype: 'checkcolumn',
+                header   : 'Готов?', 
+                dataIndex: 'isRedy',
+                width    : 75
+                 
+            }
+        ]
+	});      
+	
+var store_1 = new Ext.data.ArrayStore({
+    fields: ['name',
+{name: 'price',      type: 'float'},
+{name: 'on',      type: 'bool'},
+]  
+ ,listeners: {'update':{fn:onStoreUpdate,scope:this}}
+ });
+var myData=[
+ ['name1',71.72, true],
+ ['name2',23.45, true],
+ ['name3',78.56, true],
+ ['name4',81.74, true],
+ ['name5',89.8, false]
+ 
+];
+
+store_1.loadData(myData);
+
+ var cm = new Ext.grid.ColumnModel({
+        // specify any defaults for each column
+        defaults: {
+            sortable: true // columns are not sortable by default           
+        },
+        columns:[{
+                id       :'name',
+                header   : 'Наименование', 
+                width    : 160, 
+                sortable : true, 
+                dataIndex: 'name'
+                ,editor: { xtype: 'textfield'}      
+            },
+            {
+                header   : 'Price', 
+                width    : 75, 
+                sortable : true, 
+                renderer : 'usMoney', 
+                dataIndex: 'price'
+                ,editor: { xtype: 'numberfield'}      
+            },
+            {   xtype: 'checkcolumn',
+                header   : 'Готов?', 
+                dataIndex: 'on',
+                width    : 75
+            }
+        ]
+});      	
+
+var grid = new Ext.grid.EditorGridPanel({
+        store: store_1,
+        clicksToEdit: 1,
+        cm:cm,
+        stripeRows: true,
+        autoExpandColumn: 'name',
+        height: 350,
+        width: 600,
+        title: 'Array Grid',
+        // config options for stateful behavior
+        stateful: true,
+        stateId: 'grid'
+});
+
+    // render the grid to the specified div in the page
+    grid.render('ext-grid');
+
+
+function onStoreUpdate(store, record, operation ) 	
+{
+
+alert('onStoreUpdate');
+
+ console.log('store'); console.log(store);
+ console.log('record'); console.log(record);
+  //console.log('nm'); console.log(nm);
+ var el= document.getElementById("forRes");
+
+ //var json_=Ext.decode(el.value,1);
+ //json_[tf.name]=nv;
+ //CPPV_GFG.store.
+ // CPPV_GFG.store.();
+ el.innerHTML=JSON.stringify(store_1.reader.jsonData);
+}
+   
+   
+   
+});
+
